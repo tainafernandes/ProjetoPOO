@@ -12,20 +12,20 @@ public class Main {
 
         Students students = new Students();
 
-        System.out.println("Name: ");
+        System.out.print("Name: ");
         students.name = sc.nextLine();
-        System.out.println("Note 1: ");
+        System.out.print("Note 1: ");
         students.note1 = sc.nextDouble();
-        System.out.println("Note 2: ");
+        System.out.print("Note 2: ");
         students.note2 = sc.nextDouble();
-        System.out.println("Note 3: ");
+        System.out.print("Note 3: ");
         students.note3 = sc.nextDouble();
 
-        System.out.printf("FINAL GRADE = %2.f%n", students.finalGrade());
+        System.out.printf("FINAL GRADE = %.2f%n", students.finalGrade());
 
         if(students.finalGrade() < 60.0){
             System.out.println("FAILED");
-            System.out.printf("MISSING %.2f%n", students.missingPoints());
+            System.out.printf("MISSING %.2f POINTS%n", students.missingPoints());
         } else {
             System.out.println("PASS");
         }
