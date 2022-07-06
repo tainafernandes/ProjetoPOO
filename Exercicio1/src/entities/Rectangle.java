@@ -12,10 +12,11 @@ public class Rectangle {
         return 2.0 * (width + height);
     };
 
-    public double
+    public double diagonal() {
+        return Math.sqrt(width * width + height * height);
+    }
 }
 
-//area = largura * altura
-// perimetro = 2.0 * (largura + altura)
+
 //diagonal ao quadrado = base ao quadrado + altura ao quadrado ou d = raiz quadrada de base ao quadrado + altura
 //ao quadrado
