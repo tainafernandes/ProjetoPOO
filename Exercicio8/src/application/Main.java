@@ -1,7 +1,61 @@
 package application;
 
-public class Main {
-    public static void Main(String[] args) {
+import entities.Department;
+import entities.HourContract;
+import entities.Worker;
+import entities.enums.WorkerLevel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws ParseException {
+        Locale.setDefault(Locale.US);
+        Scanner sc = new Scanner(System.in);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        System.out.print("Enter department's name: ");
+        String departmentName = sc.nextLine();
+        System.out.println("Enter worker data: ");
+        System.out.print("Name: ");
+        String workerName = sc.nextLine();
+        System.out.print("Level: ");
+        String workerLevel = sc.nextLine();
+        System.out.print("Base salary: ");
+        double baseSalary = sc.nextDouble();
+        Worker worker = new Worker(workerName, WorkerLevel.valueOf(workerLevel), baseSalary, new Department(departmentName)); //instanciacao do trabalhador, com seus dados,
+        //nome, valor, salario e tem um novo objeto do tipo departmente que vai receber o nome digitado
+
+        System.out.print("How many contracts to this worker? ");
+        int n = sc.nextInt();
+
+        for (int i = 1; i <= n; i++){
+            System.out.println("Enter contract #" + i + " data: ");
+            System.out.print("Date (DD/MM/YYYY): ");
+            Date contractDate = sdf.parse(sc.next());
+            System.out.print("Value per hour: ");
+            double valuePerHour = sc.nextDouble();
+            System.out.print("Duration (hours): ");
+            int hours = sc.nextInt();
+            HourContract contract = new HourContract(contractDate, valuePerHour, hours);
+            worker.addContract(contract); //faz o contrato ser associado ao trabalhador
+            //o for vai rodar varias vezes até instanciar os contratos e associar ao trabalhador
+        }
+
+        System.out.println();
+        System.out.print("Enter month and year to calculate income (MM/YYYY): ");
+        String monthAndYear = sc.next();
+        int month = Integer.parseInt(monthAndYear.substring(0, 2)); //sempre informo 1 à mais para pegar o valor
+        int year = Integer.parseInt(monthAndYear.substring(3));
+
+        System.out.println("Name: " + worker.getName());
+        System.out.println("Department: " + worker.getDepartment().getName()); //acesso o departamento e o nome do departamento
+        System.out.println("Income for " + monthAndYear + ": " + String.format("%.2f", worker.income(year, month)));
+
+
+        sc.close();
     }
 }
