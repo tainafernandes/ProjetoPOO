@@ -1,4 +1,4 @@
-package application;
+package entities;
 
 public class Product {
 }
