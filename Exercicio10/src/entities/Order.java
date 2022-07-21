@@ -14,7 +14,7 @@ public class Order {
     private OrderStatus status;
 
     private Client client;
-    private List<OrderItem> items = new ArrayList<>();
+    private List<OrderItem> items = new ArrayList<>(); //varios intems
 
     public Order(){
         //empty constructor
@@ -50,9 +50,10 @@ public class Order {
         this.client = client;
     }
 
-    public List<OrderItem> getItems() {
-        return items;
-    }
+    /* public List<OrderItem> getItems() {
+        return items; //dando acesso direto a lista - não uso
+        para ninguem ter acesso a lista
+    } */
 
 
     public void addItem(OrderItem item){
@@ -63,7 +64,29 @@ public class Order {
         items.remove(item);
     }
 
-    public double total(){
+    public double total(){ //soma subtotais
+        double sum = 0.0;
+        for(OrderItem it : items){
+            sum += it.subTotal();
+        }
+        return sum;
+    }
 
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Order Moment: ");
+        sb.append(sdf.format(moment) + "\n");
+        sb.append("Order status: ");
+        sb.append(status + "\n");
+        sb.append("Client: ");
+        sb.append(client + "\n");
+        sb.append("Order items: \n");
+        for(OrderItem item : items){
+            sb.append(item + "\n");
+        }
+        sb.append("Total price: $");
+        sb.append(String.format("%.2f", total()));
+        return sb.toString();
     }
 }
