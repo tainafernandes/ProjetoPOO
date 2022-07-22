@@ -4,7 +4,7 @@ public class Account {
 
     private Integer number;
     private String holder;
-    private Double balance;
+    protected Double balance; //protected a subclasse pode acessar, mas não é publico
 
     public Account(){
         //empty constructor

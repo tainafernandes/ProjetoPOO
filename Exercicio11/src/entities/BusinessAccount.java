@@ -24,7 +24,7 @@ public class BusinessAccount extends Account{ //herança
 
     public void loan(double amount){
         if(amount <= loanLimit) {
-            deposit(amount);
+            balance += amount - 10.0;
         }
     }
 }
