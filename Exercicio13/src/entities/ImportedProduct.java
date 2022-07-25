@@ -1,7 +1,8 @@
 package entities;
 
 public class ImportedProduct extends Product{
-    protected Double customsFree;
+    protected Double
+            customsFree;
 
     public ImportedProduct(){
         super();
