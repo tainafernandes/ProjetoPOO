@@ -1,6 +1,7 @@
 package application;
 
 import entities.Account;
+import exceptions.BusinessException;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -26,8 +27,13 @@ public class Main {
         System.out.print("Enter amount for withdraw: ");
         double amount = sc.nextDouble();
 
-        acc.withdraw(amount);
-        System.out.println("New balance: " + String.format("%.2f", acc.getBalance()));
+        try {
+            acc.withdraw(amount);
+            System.out.println("New balance: " + String.format("%.2f", acc.getBalance()));
+        }
+        catch (BusinessException e){
+            System.out.println(e.getMessage()); //pega mensagem que armazenei na exceção
+        }
 
         sc.close();
     }
