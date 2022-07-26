@@ -14,14 +14,20 @@ public class Main {
         System.out.print("Number: ");
         int number = sc.nextInt();
         System.out.print("Holder: ");
-        String holder = sc.next();
+        sc.nextLine(); // consome o enter
+        String holder = sc.nextLine();
         System.out.print("Initial balance: ");
         double balance = sc.nextDouble();
         System.out.print("Withdraw limit: ");
         double withdrawLimit = sc.nextDouble();
-        Account ac = new Account(number, holder, balance, withdrawLimit);
+        Account acc = new Account(number, holder, balance, withdrawLimit);
 
+        System.out.println();
+        System.out.print("Enter amount for withdraw: ");
+        double amount = sc.nextDouble();
 
+        acc.withdraw(amount);
+        System.out.println("New balance: " + String.format("%.2f", acc.getBalance()));
 
         sc.close();
     }

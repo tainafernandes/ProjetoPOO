@@ -49,11 +49,13 @@ public class Account {
         this.withdrawLimit = withdrawLimit;
     }
 
-    public Double deposit(Double amount){
-        return balance += amount;
+    public void deposit(double amount){
+        balance += amount;
     }
 
-    public Double withdraw(Double amount){
-        return balance += amount;
+    public void withdraw(double amount){
+        balance -= amount;
     }
+
+    //public void validadeWithdraw
 }
