@@ -1,12 +1,34 @@
 package application;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.File;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+        //Manipulação de pastas com file
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a folder path: ");
+        String strPath = sc.nextLine();
+        File path = new File(strPath); //caminho digitado
+        File[] folders = path.listFiles(File::isDirectory); //Gero uma lista com todas as pastas, filtrando com a função File::isDirectory
+        System.out.println("FOLDERS:");
+        for (File folder : folders) {
+            System.out.println(folder);
+        }
+        File[] files = path.listFiles(File::isFile); //pega só arquivos
+        System.out.println("FILES:");
+        for (File file : files) {
+            System.out.println(file);
+        }
+        boolean success = new File(strPath + "\\subdir").mkdir(); //cria subpasta
+        System.out.println("Directory created successfully: " + success);
+        sc.close();
+    }
+
+
+    }
+        /*
         //Usando FileWriter e Buffered Writer
         String[] lines = new String[]{"Good nigth", "Welcome"};
 
@@ -54,4 +76,4 @@ public class Main {
             }
         }
     } */
-}
+
