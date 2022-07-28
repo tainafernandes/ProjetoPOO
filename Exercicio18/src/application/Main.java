@@ -20,6 +20,17 @@ public class Main {
         Date start = sdf.parse(sc.nextLine());
         System.out.print("Return (dd/MM/yyyy hh:ss): ");
         Date finish = sdf.parse(sc.nextLine());
+        //Instancia o carro
+
+        System.out.print("Enter price per hour: ");
+        double pricePerHour = sc.nextDouble();
+        System.out.print("Enter price per day: ");
+        double pricePerDay = sc.nextDouble();
+
+        //Instanciar o Rental service
+
+        System.out.println("INVOICE:");
+        System.out.println("Basic payment: ");
 
         sc.close();
     }
