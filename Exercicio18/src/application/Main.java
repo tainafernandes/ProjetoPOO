@@ -1,5 +1,10 @@
 package application;
 
+import model.entities.CarRental;
+import model.entities.Vehicle;
+import model.services.BrazilTaxService;
+import model.services.RentalService;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,26 +16,31 @@ public class Main {
 
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        System.out.println("Enter rentarl data");
+        System.out.println("Enter rental data");
         System.out.print("Car model: ");
         String carModel = sc.nextLine();
-        System.out.print("Pickup (dd/MM/yyyy hh:ss): ");
+        System.out.print("Pickup (dd/MM/yyyy HH:mm): ");
         Date start = sdf.parse(sc.nextLine());
-        System.out.print("Return (dd/MM/yyyy hh:ss): ");
+        System.out.print("Return (dd/MM/yyyy HH:mm): ");
         Date finish = sdf.parse(sc.nextLine());
-        //Instancia o carro
+
+        CarRental cr = new CarRental(start, finish, new Vehicle(carModel));
 
         System.out.print("Enter price per hour: ");
         double pricePerHour = sc.nextDouble();
         System.out.print("Enter price per day: ");
         double pricePerDay = sc.nextDouble();
 
-        //Instanciar o Rental service
+        RentalService rentalService = new RentalService(pricePerDay, pricePerHour, new BrazilTaxService());
+
+        rentalService.processInvoice(cr);
 
         System.out.println("INVOICE:");
-        System.out.println("Basic payment: ");
+        System.out.println("Basic payment: " + String.format("%.2f", cr.getInvoice().getBasicPayment()));
+        System.out.println("Tax: " + String.format("%.2f", cr.getInvoice().getTax()));
+        System.out.println("Total payment: " + String.format("%.2f", cr.getInvoice().getTotalPayment()));
 
         sc.close();
     }
